@@ -41,10 +41,12 @@ class _HomeState extends State<Home> {
                 )
               ],
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Text(
               data['time'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 66,
               ),
             )
