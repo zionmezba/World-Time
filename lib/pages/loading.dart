@@ -9,14 +9,13 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  String time = "Loading";
-
   setupWorlTime() async {
     WorldTime worldTime = WorldTime(location: "Dhaka", flag: "bd.jgp", url: "Asia/Dhaka");
     await worldTime.getTime();
-    // print(worldTime.time);
-    setState(() {
-      time = worldTime.time;
+    Navigator.pushReplacementNamed(context, '/home',arguments: {
+      'location': worldTime.location,
+      'flag': worldTime.flag,
+      'time': worldTime.time,
     });
   }
 
@@ -31,7 +30,7 @@ class _LoadingState extends State<Loading> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(40.0),
-        child: Text(time),
+        child: Text("Loading"),
       ),
     );
   }
