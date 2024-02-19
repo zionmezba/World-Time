@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:world_time/services/weather.dart';
 
 import '../services/world_time.dart';
 
@@ -49,12 +50,20 @@ class _ChooseLocationState extends State<ChooseLocation> {
   void updateTime(index) async {
     WorldTime inst = locations[index];
     await inst.getTime();
+
+    Weather weather = Weather(locationW: locations[index].location);
+    await weather.getWeather();
+
+    // print(weather.weatherDescription);
     // navigate to home
     Navigator.pop(context,{
       'location': inst.location,
       'flag': inst.flag,
       'time': inst.time,
       'isDayTime': inst.isDayTime,
+      'temperature': weather.temperature,
+      'windSpeed': weather.windSpeed,
+      'weatherDescription': weather.weatherDescription,
     });
   }
   @override
@@ -63,7 +72,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.blue[900],
-        title: Text("Choose a Location"),
+        title: const Text("Choose a Location"),
         centerTitle: true,
         elevation: 0,
       ),

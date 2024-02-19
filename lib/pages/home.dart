@@ -12,9 +12,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    data = data.isNotEmpty
-        ? data
-        : ModalRoute.of(context)!.settings.arguments as Map;
+    data = data.isNotEmpty ? data : ModalRoute.of(context)!.settings.arguments as Map;
     // print(data);
 
     // set bg
@@ -26,9 +24,9 @@ class _HomeState extends State<Home> {
       body: SafeArea(
           child: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/$bgImage'),
-                fit: BoxFit.cover)),
+          image: DecorationImage(
+              image: AssetImage('assets/images/$bgImage'), fit: BoxFit.cover),
+        ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 120, 0, 0),
           child: Column(
@@ -43,12 +41,23 @@ class _HomeState extends State<Home> {
                       'location': result['location'],
                       'isDayTime': result['isDayTime'],
                       'flag': result['flag'],
+                      'locationW' : result['locationW'],
+                      'temperature' : result['temperature'],
+                      'windSpeed' : result['windSpeed'],
+                      'weatherDescription' : result['weatherDescription'],
                     };
                   });
                 },
-                icon: Icon(Icons.edit_location),
+                icon: const Icon(
+                  Icons.edit_location,
+                  size: 30,
+                ),
                 color: Colors.grey[100],
                 tooltip: "Select Location",
+              ),
+              const Text(
+                "Choose Location",
+                style: TextStyle(color: Colors.white),
               ),
               const SizedBox(
                 height: 20,
@@ -72,7 +81,44 @@ class _HomeState extends State<Home> {
                   color: Colors.white,
                   fontSize: 66,
                 ),
-              )
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              Text(
+                "${data['temperature']}\u00B0c",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 55,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "${data['weatherDescription']}",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                ),
+              ),SizedBox(height: 10,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.wind_power,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 10,),
+                  Text(
+                    "${data['windSpeed']} km/h",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
