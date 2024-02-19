@@ -1,6 +1,5 @@
 import 'package:http/http.dart';
 import 'dart:convert';
-import 'package:intl/intl.dart';
 
 class Weather {
   String weatherDescription = '';
@@ -25,10 +24,10 @@ class Weather {
       weatherDescription = weatherDescription.substring(0, 1).toUpperCase() +
           weatherDescription.substring(1);
       windSpeed = data['wind']['speed'].toString();
-      print("temperature : $temperature");
+      // print("temperature : $temperature");
     } catch (e) {
       temperature = "Unable to get Temperature Data";
-      print('error is : $e');
+      // print('error is : $e');
     }
   }
 }
